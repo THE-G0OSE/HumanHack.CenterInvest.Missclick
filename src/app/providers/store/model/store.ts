@@ -1,8 +1,13 @@
 import { ReducersMapObject } from "redux";
 import { IStore } from "./types";
 import { configureStore } from "@reduxjs/toolkit";
+import { userReducer } from "@/entities/user/model/slice";
+import { projectsReducer } from "@/entities/project/model/slice";
 
-const rootReducer: ReducersMapObject<IStore> = {};
+const rootReducer: ReducersMapObject<IStore> = {
+  user: userReducer,
+  projects: projectsReducer,
+};
 
 export const makeStore = () => {
   return configureStore({
