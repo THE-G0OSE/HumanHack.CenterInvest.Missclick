@@ -1,8 +1,8 @@
 import { ReducersMapObject } from "redux";
 import { IStore } from "./types";
 import { configureStore } from "@reduxjs/toolkit";
-import { userReducer } from "@/entities/user/model/slice";
-import { projectsReducer } from "@/entities/project/model/slice";
+import { userReducer } from "@/entities/user/";
+import { projectsReducer } from "@/entities/project/";
 
 const rootReducer: ReducersMapObject<IStore> = {
   user: userReducer,

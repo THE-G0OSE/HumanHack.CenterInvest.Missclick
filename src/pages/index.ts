@@ -1,0 +1,6 @@
+export * from './about'
+export * from './auth'
+export * from './dashboard'
+export * from './home'
+export * from './projects'
+export * from './project'
