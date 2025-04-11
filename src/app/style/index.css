@@ -1,1 +1,61 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* ligth theme */
+
+  --color-lt-bg: hsl(0, 0%, 100%);
+  --color-lt-foreground: hsl(240, 10%, 3.9%);
+  --color-lt-card: hsl(0, 0%, 100%);
+  --color-lt-card-foreground: hsl(240, 10%, 3.9%);
+  --color-lt-popover: hsl(0, 0%, 100%);
+  --color-lt-popover-foreground: hsl(240, 10%, 3.9%);
+  --color-lt-primary: hsl(142, 76%, 36%);
+  --color-lt-primary-foreground: hsl(335.7, 100%, 97.3%);
+  --color-lt-secondary: hsl(240, 4.8%, 95.9%);
+  --color-lt-secondary-foreground: hsl(240, 5.9%, 10%);
+  --color-lt-muted: hsl(240, 4.8%, 95.9%);
+  --color-lt-muted-foreground: hsl(240, 3.8%, 46.1%);
+  --color-lt-accent: hsl(240, 3.8%, 46.1%);
+  --color-lt-accent-foreground: hsl(240, 5.9%, 10%);
+  --color-lt-destructive: hsl(0, 84.2%, 60.2%);
+  --color-lt-destructive-foreground: hsl(0, 0%, 98%);
+  --color-lt-border: hsl(240, 5.9%, 90%);
+  --color-lt-input: hsl(240, 5.9%, 90%);
+  --color-lt-ring: hsl(142, 76%, 36%);
+
+  /* dark theme */
+
+  --color-dk-bg: hsl(20, 14.3%, 4.1%);
+  --color-dk-foreground: hsl(0, 0%, 95%);
+  --color-dk-card: hsl(24, 9.8%, 10%);
+  --color-dk-card-foreground: hsl(0, 0%, 95%);
+  --color-dk-popover: hsl(0, 0%, 9%);
+  --color-dk-popover-foreground: hsl(0, 0%, 95%);
+  --color-dk-primary: hsl(142, 70%, 50%);
+  --color-dk-primary-foreground: hsl(144.9, 80.4%, 10%);
+  --color-dk-secondary: hsl(240, 3.7%, 80.4%);
+  --color-dk-secondary-foreground: hsl(0, 0%, 98%);
+  --color-dk-muted: hsl(0, 0%, 15%);
+  --color-dk-muted-foreground: hsl(240, 5%, 64.9%);
+  --color-dk-accent: hsl(12, 6.5%, 15.1%);
+  --color-dk-accent-foreground: hsl(0, 0%, 98%);
+  --color-dk-destructive: hsl(0, 62.8%, 30.6%);
+  --color-dk-destructive-foreground: hsl(0, 85.7%, 97.3%);
+  --color-dk-border: hsl(240, 3.7%, 15.9%);
+  --color-dk-input: hsl(240, 3.7%, 15.9%);
+  --color-dk-ring: hsl(142, 76%, 36%);
+}
+
+@layer base {
+  * {
+    @apply border-lt-border dark:border-dk-border;
+  }
+
+  body {
+    @apply bg-lt-bg 
+    dark:bg-dk-bg 
+    text-lt-foreground 
+    dark:text-dk-foreground;
+  }
+}
