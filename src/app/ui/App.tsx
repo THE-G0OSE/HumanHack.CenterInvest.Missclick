@@ -1,16 +1,15 @@
-import { Routing } from "../providers/router/Routing"
-import { StoreProvider } from "../providers/store/ui/StoreProvider"
+import { Layout } from "@/widgets/layouts/appLayout";
+import { Routing } from "../providers/router/Routing";
+import { StoreProvider } from "../providers/store/ui/StoreProvider";
 
 const App = () => {
-
   return (
-
     <StoreProvider>
-        <Routing/>
+      <Layout>
+        <Routing />
+      </Layout>
     </StoreProvider>
+  );
+};
 
-  )
-
-}
-
-export default App
+export default App;
