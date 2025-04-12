@@ -9,7 +9,7 @@ export interface IUserData {
 }
 
 const initialState: IUserData = {
-  currentUser: mockUser,
+  currentUser: null,
   loading: false,
   error: null,
 };

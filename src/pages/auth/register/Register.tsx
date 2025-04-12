@@ -9,6 +9,10 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Leaf } from "lucide-react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
+import {
+  useEmailCodeMutation,
+  useRegisterMutation,
+} from "@/features/auth/api/AuthApi";
 
 export function Register() {
   const navigate = useNavigate();
@@ -20,43 +24,37 @@ export function Register() {
   const [isVerifying, setIsVerifying] = useState(false);
   const [verificationCode, setVerificationCode] = useState("");
 
+  const [verifyCode, { isSuccess: isVerifyingCode }] = useEmailCodeMutation();
+  const [register] = useRegisterMutation();
+
   const handleSubmitRegistration = (e: React.FormEvent) => {
     e.preventDefault();
-
     if (password !== confirmPassword) {
       toast("Пароли не совпадают");
       return;
     }
-
     if (!acceptTerms) {
       toast("Необходимо принять условия использования");
       return;
     }
-
-    console.log({ name, email, password, confirmPassword, acceptTerms });
-
+    register({ name: name, email: email, password: password });
     setIsVerifying(true);
-
     toast(`Мы отправили код на адрес ${email}`);
   };
 
-  const handleVerifyCode = () => {
+  const handleVerifyCode = async () => {
     console.log(`Verifying code: ${verificationCode}`);
-
-    if (verificationCode === "123456") {
-      toast("Ваш аккаунт успешно создан. Теперь вы можете войти в систему.");
-
-      setTimeout(() => {
-        window.location.href = "/auth/login";
-      }, 2000);
-    } else {
-      toast("Пожалуйста, проверьте код и попробуйте снова");
-    }
-  };
-
-  const handleResendCode = () => {
-    console.log(`Resending verification code to ${email}`);
-    toast(`Мы отправили новый код на адрес ${email}`);
+    await verifyCode({ confirm_code: verificationCode, email: email });
+    setTimeout(() => {
+      if (isVerifyingCode) {
+        toast("Ваш аккаунт успешно создан. Теперь вы можете войти в систему.");
+        setTimeout(() => {
+          window.location.href = "/auth/login";
+        }, 2000);
+      } else {
+        toast("Пожалуйста, проверьте код и попробуйте снова");
+      }
+    }, 500);
   };
 
   return (
@@ -177,12 +175,6 @@ export function Register() {
                 >
                   Подтвердить
                 </Button>
-
-                <div className="text-center">
-                  <Button variant="link" onClick={handleResendCode}>
-                    Отправить код повторно
-                  </Button>
-                </div>
               </div>
             </CardContent>
           )}

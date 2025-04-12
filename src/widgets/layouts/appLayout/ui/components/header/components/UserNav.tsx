@@ -9,15 +9,21 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useAppSelector } from "@/shared/lib/hooks";
+import { useAppDispatch, useAppSelector } from "@/shared/lib/hooks";
 import { selectUser } from "@/entities/user/model/selectors";
 import { useNavigate } from "react-router";
+import { setUser } from "@/entities/user";
+
 
 export function UserNav() {
   const user = useAppSelector(selectUser);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch()
 
-  const logOut = () => {};
+  const logOut = () => {
+    window.localStorage.removeItem('token')
+    dispatch(setUser(null))
+  };
 
   if (!user) return null;
 

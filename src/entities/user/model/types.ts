@@ -10,7 +10,7 @@ export interface User {
   }
   achievements: Achievement[]
   transactions: Transaction[]
-  backedProjects: string[] // IDs of projects backed by the user
+  backedProjects: string[]
 }
 
 export interface Achievement {
@@ -28,4 +28,10 @@ export interface Transaction {
   amount: number
   date: string
   status: "completed" | "pending" | "failed"
+}
+
+export interface UserResponse {
+  name: string;
+  email: string;
+  password: string;
 }

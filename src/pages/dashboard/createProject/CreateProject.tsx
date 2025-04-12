@@ -21,7 +21,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Separator } from "@/components/ui/separator";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router";
 
@@ -35,7 +34,6 @@ export function CreateProject() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would dispatch an action to create a project
     console.log({ title, description, category, targetAmount, endDate });
   };
 
@@ -59,7 +57,6 @@ export function CreateProject() {
           <TabsTrigger value="details">Основная информация</TabsTrigger>
           <TabsTrigger value="funding">Финансирование</TabsTrigger>
           <TabsTrigger value="media">Медиа</TabsTrigger>
-          <TabsTrigger value="team">Команда</TabsTrigger>
         </TabsList>
 
         <TabsContent value="details">
@@ -121,19 +118,8 @@ export function CreateProject() {
                   </Select>
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="tags">Теги</Label>
-                  <Input
-                    id="tags"
-                    placeholder="Например: лес, экология, сибирь"
-                  />
-                  <p className="text-xs text-lt-muted-foreground dark:text-dk-muted-foreground">
-                    Разделяйте теги запятыми
-                  </p>
-                </div>
               </CardContent>
               <CardFooter className="flex justify-between">
-                <Button variant="outline">Сохранить черновик</Button>
                 <Button type="submit">Продолжить</Button>
               </CardFooter>
             </form>
@@ -173,43 +159,9 @@ export function CreateProject() {
                   onChange={(e) => setEndDate(e.target.value)}
                 />
               </div>
-
-              <Separator />
-
-              <div>
-                <h3 className="text-lg font-medium mb-4">Бюджет проекта</h3>
-                <p className="text-sm text-lt-muted-foreground dark:text-dk-muted-foreground mb-4">
-                  Распишите, на что будут потрачены собранные средства. Это
-                  повысит доверие к вашему проекту.
-                </p>
-
-                <div className="space-y-4">
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="col-span-2">
-                      <Input placeholder="Статья расходов" />
-                    </div>
-                    <div>
-                      <Input type="number" min="0" placeholder="Сумма (₽)" />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="col-span-2">
-                      <Input placeholder="Статья расходов" />
-                    </div>
-                    <div>
-                      <Input type="number" min="0" placeholder="Сумма (₽)" />
-                    </div>
-                  </div>
-
-                  <Button variant="outline" className="w-full">
-                    Добавить статью расходов
-                  </Button>
-                </div>
-              </div>
+              
             </CardContent>
             <CardFooter className="flex justify-between">
-              <Button variant="outline">Сохранить черновик</Button>
               <Button>Продолжить</Button>
             </CardFooter>
           </Card>
@@ -237,80 +189,9 @@ export function CreateProject() {
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <Label>Галерея проекта</Label>
-                <div className="border-2 border-dashed rounded-lg p-12 text-center">
-                  <p className="text-lt-muted-foreground dark:text-dk-muted-foreground mb-2">
-                    Перетащите изображения сюда или
-                  </p>
-                  <Button variant="outline">Выбрать файлы</Button>
-                  <p className="text-xs text-lt-muted-foreground dark:text-dk-muted-foreground mt-2">
-                    До 5 изображений. PNG, JPG или GIF. Максимальный размер 5MB
-                    каждое.
-                  </p>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="video">Ссылка на видео (YouTube, Vimeo)</Label>
-                <Input
-                  id="video"
-                  placeholder="https://youtube.com/watch?v=..."
-                />
-              </div>
             </CardContent>
             <CardFooter className="flex justify-between">
-              <Button variant="outline">Сохранить черновик</Button>
               <Button>Продолжить</Button>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="team">
-          <Card>
-            <CardHeader>
-              <CardTitle>Команда проекта</CardTitle>
-              <CardDescription>
-                Расскажите о команде, которая будет реализовывать проект
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="space-y-2">
-                <Label htmlFor="team-description">О команде</Label>
-                <Textarea
-                  id="team-description"
-                  placeholder="Расскажите о вашей команде, опыте и квалификации"
-                  className="min-h-[150px]"
-                />
-              </div>
-
-              <div>
-                <h3 className="text-lg font-medium mb-4">Участники команды</h3>
-                <div className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label>Имя</Label>
-                      <Input placeholder="Имя участника" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label>Должность</Label>
-                      <Input placeholder="Должность в проекте" />
-                    </div>
-                    <div className="space-y-2 md:col-span-2">
-                      <Label>Описание</Label>
-                      <Textarea placeholder="Опыт и роль в проекте" />
-                    </div>
-                  </div>
-
-                  <Button variant="outline" className="w-full">
-                    Добавить участника
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-            <CardFooter className="flex justify-between">
-              <Button variant="outline">Сохранить черновик</Button>
-              <Button>Отправить на модерацию</Button>
             </CardFooter>
           </Card>
         </TabsContent>
