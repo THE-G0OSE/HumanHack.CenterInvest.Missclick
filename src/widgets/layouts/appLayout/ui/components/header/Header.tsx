@@ -3,11 +3,14 @@ import { cn } from "@/lib/utils";
 import { UserNav, MobileNav } from "./components";
 import { Leaf } from "lucide-react";
 import { useLocation, useNavigate } from "react-router";
+import { useAppSelector } from "@/shared/lib/hooks";
+import { selectUser } from "@/entities/user";
 
 export function Header() {
   const navigate = useNavigate();
   const location = useLocation();
   const pathname = location.pathname;
+  const user = useAppSelector(selectUser)
 
   const navItems = [
     { label: "Главная", href: "/" },
@@ -46,14 +49,14 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="hidden md:flex items-center gap-2">
+          {!user && <div className="hidden md:flex items-center gap-2">
             <button onClick={() => navigate("/auth/login")}>
               <Button variant="ghost">Войти</Button>
             </button>
             <button onClick={() => navigate("/auth/register")}>
               <Button>Регистрация</Button>
             </button>
-          </div>
+          </div>}
 
           <UserNav />
           <MobileNav items={navItems} />

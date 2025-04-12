@@ -1,5 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import type { User } from "./types"
+import { mockUser } from "@/shared/mocks/user"
 
 export interface IUserData {
   currentUser: User | null
@@ -8,7 +9,7 @@ export interface IUserData {
 }
 
 const initialState: IUserData = {
-  currentUser: null,
+  currentUser: mockUser,
   loading: false,
   error: null,
 }

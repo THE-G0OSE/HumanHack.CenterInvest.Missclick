@@ -42,18 +42,18 @@ export function UserNav() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <button onClick={() => navigate("/dashboard")}>
+          <div onClick={() => navigate("/dashboard")}>
             <DropdownMenuItem>Личный кабинет</DropdownMenuItem>
-          </button>
-          <button onClick={() => navigate("/dashboard/projects")}>
+          </div>
+          <div onClick={() => navigate("/dashboard/projects")}>
             <DropdownMenuItem>Мои проекты</DropdownMenuItem>
-          </button>
-          <button onClick={() => navigate("/dashboard/achivments")}>
+          </div>
+          <div onClick={() => navigate("/dashboard/achivments")}>
             <DropdownMenuItem>Достижения</DropdownMenuItem>
-          </button>
-          <button onClick={() => navigate("/dashboard/settings")}>
+          </div>
+          <div onClick={() => navigate("/dashboard/settings")}>
             <DropdownMenuItem>Настройки</DropdownMenuItem>
-          </button>
+          </div>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <button onClick={logOut}>
