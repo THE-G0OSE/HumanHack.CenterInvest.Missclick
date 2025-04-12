@@ -1,7 +1,19 @@
-import React from 'react'
+import {
+  ProjectsShowcase,
+  HeroSection,
+  ImpactStats,
+  FeaturedProjects,
+  HowItWorks,
+} from "@/widgets";
 
-export const Home = () => {
+export function Home() {
   return (
-    <div>Home</div>
-  )
+    <main className="min-h-screen">
+      <HeroSection />
+      <ImpactStats />
+      <FeaturedProjects />
+      <HowItWorks />
+      <ProjectsShowcase />
+    </main>
+  );
 }

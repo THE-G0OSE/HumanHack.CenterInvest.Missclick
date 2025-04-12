@@ -16,7 +16,7 @@ export function Header() {
   ];
 
   return (
-    <header className="border-b bg-background sticky top-0 z-50 flex justify-center">
+    <header className="border-lt-border dark:border-dk-border bg-lt-bg dark:bg-dk-bg sticky top-0 z-50 flex justify-center">
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-8">
           <button
@@ -33,10 +33,10 @@ export function Header() {
                 key={item.href}
                 onClick={() => navigate(item.href)}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary",
+                  "text-sm font-medium transition-colors hover:text-lt-primary dark:hover:text-dk-primary",
                   pathname === item.href
-                    ? "text-foreground"
-                    : "text-muted-foreground"
+                    ? "text-lt-foreground dark:text-dk-foreground"
+                    : "text-lt-muted-foreground dark:text-dk-foreground"
                 )}
               >
                 {item.label}

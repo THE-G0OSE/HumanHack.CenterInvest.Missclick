@@ -33,10 +33,10 @@ export function MobileNav({ items }: MobileNavProps) {
                 navigate(item.href);
               }}
               className={cn(
-                "text-base font-medium transition-colors hover:text-primary",
+                "text-base font-medium transition-colors hover:text-lt-primary dark:hover:text-dk-primary",
                 pathname === item.href
-                  ? "text-foreground"
-                  : "text-muted-foreground"
+                  ? "text-lt-foreground dark:text-dk-foreground"
+                  : "text-lt-muted-foreground dark:text-dk-muted-foreground"
               )}
             >
               {item.label}
