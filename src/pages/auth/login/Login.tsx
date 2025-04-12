@@ -58,7 +58,7 @@ export function Login() {
                   <div className="flex items-center justify-between">
                     <Label htmlFor="password">Пароль</Label>
                     <button
-                      onClick={() => navigate("./auth/reset")}
+                      onClick={() => navigate("/auth/reset")}
                       className="text-xs text-lt-muted-foreground dark:text-dk-muted-foreground hover:text-lt-primary dark:hover:text-dk-primary"
                     >
                       Забыли пароль?
