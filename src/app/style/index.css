@@ -265,9 +265,9 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-lt-border dark:border-dk-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-lt-bg dark:bg-dk-bg text-lt-foreground dark:text-dk-foreground;
   }
 }
