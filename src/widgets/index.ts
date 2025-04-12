@@ -3,3 +3,4 @@ export * from "./heroSection";
 export * from "./howItWorks";
 export * from "./impactStats";
 export * from "./projectsShowcase";
+export * from "./projectsList";
