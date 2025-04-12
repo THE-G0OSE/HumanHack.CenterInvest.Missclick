@@ -30,13 +30,11 @@ export function Settings() {
 
   const handleProfileSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would dispatch an action to update the profile
     console.log({ name, email, bio });
   };
 
   const handleNotificationsSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would dispatch an action to update notification settings
     console.log({ emailNotifications, pushNotifications, marketingEmails });
   };
 
@@ -83,6 +81,16 @@ export function Settings() {
                     />
                   </div>
                   <div className="space-y-2">
+                    <Label htmlFor="email-confirm">Подтверждение Email</Label>
+                    <Input
+                      id="email-confirm"
+                      type="email"
+                      placeholder="Повторите ваш email для подтверждения"
+                      value={email}
+                      onChange={(e) => {}}
+                    />
+                  </div>
+                  <div className="space-y-2">
                     <Label htmlFor="bio">О себе</Label>
                     <Textarea
                       id="bio"
@@ -91,7 +99,7 @@ export function Settings() {
                     />
                   </div>
                 </CardContent>
-                <CardFooter className='mt-2'>
+                <CardFooter className="mt-2">
                   <Button type="submit">Сохранить изменения</Button>
                 </CardFooter>
               </form>
