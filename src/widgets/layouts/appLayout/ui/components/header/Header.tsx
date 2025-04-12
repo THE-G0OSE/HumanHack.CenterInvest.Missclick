@@ -10,7 +10,7 @@ export function Header() {
   const navigate = useNavigate();
   const location = useLocation();
   const pathname = location.pathname;
-  const user = useAppSelector(selectUser)
+  const user = useAppSelector(selectUser);
 
   const navItems = [
     { label: "Главная", href: "/" },
@@ -49,14 +49,16 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-4">
-          {!user && <div className="hidden md:flex items-center gap-2">
-            <button onClick={() => navigate("/auth/login")}>
-              <Button variant="ghost">Войти</Button>
-            </button>
-            <button onClick={() => navigate("/auth/register")}>
-              <Button>Регистрация</Button>
-            </button>
-          </div>}
+          {!user && (
+            <div className="hidden md:flex items-center gap-2">
+              <button onClick={() => navigate("/auth/login")}>
+                <Button variant="ghost">Войти</Button>
+              </button>
+              <button onClick={() => navigate("/auth/register")}>
+                <Button>Регистрация</Button>
+              </button>
+            </div>
+          )}
 
           <UserNav />
           <MobileNav items={navItems} />

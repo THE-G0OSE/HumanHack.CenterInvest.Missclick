@@ -1,7 +1,7 @@
 import {
   Home,
   About,
-  Achivments,
+  Achievements,
   Login,
   MyProjects,
   PasswordReset,
@@ -10,6 +10,7 @@ import {
   Register,
   Settings,
   Dashboard,
+  CreateProject,
 } from "@/pages";
 import { RoutePath } from "@/shared/config/route-path/route-path";
 import { RouteProps } from "react-router";
@@ -45,7 +46,7 @@ export const Routes: RouteProps[] = [
   },
   {
     path: RoutePath.ACHIVMENTS.fullPath,
-    element: <Achivments />,
+    element: <Achievements />,
   },
   {
     path: RoutePath.SETTINGS.fullPath,
@@ -58,5 +59,9 @@ export const Routes: RouteProps[] = [
   {
     path: RoutePath.PROJECT_DETAIL.fullPath,
     element: <Project />,
+  },
+  {
+    path: RoutePath.PROJECT_CREATE.fullPath,
+    element: <CreateProject />,
   },
 ];

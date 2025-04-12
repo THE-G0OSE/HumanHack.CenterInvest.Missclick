@@ -1,4 +1,4 @@
-import type { User } from "@/entities/user"
+import type { User } from "@/entities/user";
 
 export const mockUser: User = {
   id: "user123",
@@ -60,4 +60,4 @@ export const mockUser: User = {
     },
   ],
   backedProjects: ["1", "2", "3"],
-}
+};

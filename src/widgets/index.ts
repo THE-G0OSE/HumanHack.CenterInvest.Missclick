@@ -4,3 +4,7 @@ export * from "./howItWorks";
 export * from "./impactStats";
 export * from "./projectsShowcase";
 export * from "./projectsList";
+export * from "./userAchievements";
+export * from "./userProjects";
+export * from "./userStats";
+export * from "./userTransactions";
