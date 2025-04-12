@@ -11,6 +11,7 @@ import {
   Settings,
   Dashboard,
   CreateProject,
+  EditProject,
 } from "@/pages";
 import { RoutePath } from "@/shared/config/route-path/route-path";
 import { RouteProps } from "react-router";
@@ -63,5 +64,9 @@ export const Routes: RouteProps[] = [
   {
     path: RoutePath.PROJECT_CREATE.fullPath,
     element: <CreateProject />,
+  },
+  {
+    path: RoutePath.PROJECT_EDIT.fullPath,
+    element: <EditProject />,
   },
 ];

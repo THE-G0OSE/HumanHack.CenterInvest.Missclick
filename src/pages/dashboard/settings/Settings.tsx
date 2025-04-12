@@ -18,6 +18,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAppSelector } from "@/shared/lib/hooks";
 import { selectUser } from "@/entities/user/model/selectors";
+import { toast } from 'sonner'
 
 export function Settings() {
   const user = useAppSelector(selectUser);
@@ -31,11 +32,13 @@ export function Settings() {
   const handleProfileSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log({ name, email, bio });
+    toast('Ваши изменения успешно сохранены')
   };
 
   const handleNotificationsSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log({ emailNotifications, pushNotifications, marketingEmails });
+    toast('Ваши настройки уведомлений сохранены')
   };
 
   return (
@@ -80,16 +83,7 @@ export function Settings() {
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email-confirm">Подтверждение Email</Label>
-                    <Input
-                      id="email-confirm"
-                      type="email"
-                      placeholder="Повторите ваш email для подтверждения"
-                      value={email}
-                      onChange={(e) => {}}
-                    />
-                  </div>
+                  
                   <div className="space-y-2">
                     <Label htmlFor="bio">О себе</Label>
                     <Textarea

@@ -8,3 +8,7 @@ export * from "./userAchievements";
 export * from "./userProjects";
 export * from "./userStats";
 export * from "./userTransactions";
+export * from "./projectComments";
+export * from "./projectUpdates";
+export * from "./projectFundingPanel";
+export * from "./projectDetails";

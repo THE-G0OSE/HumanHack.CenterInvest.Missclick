@@ -60,4 +60,9 @@ export const RoutePath: Record<enumPath, IRoutePath> = {
     path: "/dashboard",
     fullPath: "/dashboard/projects/create",
   },
+  [enumPath.PROJECT_EDIT]: {
+    name: "Редактирование проекта",
+    path: "/dashboard",
+    fullPath: "/dashboard/projects/edit/:id",
+  },
 };
