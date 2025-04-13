@@ -15,7 +15,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useAppSelector } from "@/shared/lib/hooks";
 import { selectUser } from "@/entities/user/model/selectors";
 import { toast } from 'sonner'
@@ -106,7 +106,6 @@ export function Settings() {
               </CardHeader>
               <CardContent className="flex flex-col items-center space-y-4">
                 <Avatar className="h-24 w-24">
-                  <AvatarImage src={user?.avatar} />
                   <AvatarFallback>{user?.name.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <Button variant="outline">Загрузить новое фото</Button>
