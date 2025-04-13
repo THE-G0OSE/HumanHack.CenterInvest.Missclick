@@ -1,5 +1,3 @@
-import { ITransaction } from "@/entities/transaction/model/types";
-
 export interface User {
   id: string;
   name: string;

@@ -12,7 +12,7 @@ interface IProps {
 }
 
 export const Layout: React.FC<IProps> = ({ children }) => {
-  const { data: projectsData, refetch } = useGetProjectsQuery("");
+  const { data: projectsData } = useGetProjectsQuery("");
   const dispatch = useAppDispatch();
   const token = window.localStorage.getItem("token");
   const { data: userData, isSuccess } = useGetMEQuery(token ? token : "");
@@ -26,7 +26,6 @@ export const Layout: React.FC<IProps> = ({ children }) => {
             id: "1",
             ecoWallet: { co2Saved: 0, treesPlanted: 0, waterSaved: 0 },
             achievements: [],
-            transactions: [],
             backedProjects: [],
           })
         );
