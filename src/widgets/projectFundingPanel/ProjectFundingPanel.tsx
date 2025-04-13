@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
+import { usePostTransactionMutation } from "@/entities/transaction/model/api/transactionApi";
 
 interface ProjectFundingPanelProps {
   id: string;
@@ -22,13 +23,14 @@ interface ProjectFundingPanelProps {
 export function ProjectFundingPanel({ id }: ProjectFundingPanelProps) {
   const project = useAppSelector(selectProjectById(id));
   const [amount, setAmount] = useState("500");
+  const [postTransaction] = usePostTransactionMutation();
 
   if (!project) {
     return null;
   }
 
   const progress = Math.min(
-    Math.round((project.currentAmount / project.targetAmount) * 100),
+    Math.round((project.current_amount / project.target_amount) * 100),
     100
   );
 
@@ -41,6 +43,10 @@ export function ProjectFundingPanel({ id }: ProjectFundingPanelProps) {
     setAmount(value);
   };
 
+  const submitHandler = () => {
+    postTransaction({ project_id: id, amount: Number(amount) });
+  };
+
   return (
     <Card className="sticky top-24">
       <CardHeader>
@@ -50,10 +56,10 @@ export function ProjectFundingPanel({ id }: ProjectFundingPanelProps) {
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
             <span className="font-medium">
-              {project.currentAmount.toLocaleString()} ₽
+              {project.current_amount.toLocaleString()} ₽
             </span>
             <span className="text-lt-muted-foreground dark:text-dk-muted-foreground">
-              из {project.targetAmount.toLocaleString()} ₽
+              из {project.target_amount.toLocaleString()} ₽
             </span>
           </div>
           <Progress value={progress} className="h-2" />
@@ -62,7 +68,7 @@ export function ProjectFundingPanel({ id }: ProjectFundingPanelProps) {
               {project.backers} спонсоров
             </span>
             <span className="text-lt-muted-foreground dark:text-dk-muted-foreground">
-              {project.daysLeft} дней осталось
+              {project.days_left} дней осталось
             </span>
           </div>
         </div>
@@ -124,7 +130,9 @@ export function ProjectFundingPanel({ id }: ProjectFundingPanelProps) {
         </Tabs>
       </CardContent>
       <CardFooter>
-        <Button className="w-full">Поддержать проект</Button>
+        <Button onClick={submitHandler} className="w-full">
+          Поддержать проект
+        </Button>
       </CardFooter>
     </Card>
   );

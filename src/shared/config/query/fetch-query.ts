@@ -10,7 +10,8 @@ export const FETCH_TYPES = {
   GET_PROJECT: "get_project",
   PATCH_PROJECT: "patch_project",
   DELETE_PROJECT: "delete_project",
-  GET_ME: 'get_me',
+  GET_ME: "get_me",
+  POST_TRANSACTION: "post_transaction",
 };
 
 export const fetchQuery: Record<
@@ -23,10 +24,11 @@ export const fetchQuery: Record<
   [FETCH_TYPES.VERIFY_EMAIL]: "/auth/register-verify-email",
   [FETCH_TYPES.VERIFY_2FA]: "/auth/2fa",
   [FETCH_TYPES.PASSWORD_RECOVERY]: "/auth/password/recovery",
-  [FETCH_TYPES.POST_PROJECT]: "/projects",
+  [FETCH_TYPES.POST_PROJECT]: "/projects/",
   [FETCH_TYPES.GET_PROJECT]: "/projects/",
   [FETCH_TYPES.GET_PROJECTS]: "/projects",
   [FETCH_TYPES.PATCH_PROJECT]: "/projects/",
   [FETCH_TYPES.DELETE_PROJECT]: "/projects/",
-  [FETCH_TYPES.GET_ME]: '/users/get_me'
+  [FETCH_TYPES.GET_ME]: "/users/get_me",
+  [FETCH_TYPES.POST_TRANSACTION]: "transactions/new_transaction",
 };

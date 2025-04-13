@@ -36,7 +36,7 @@ export function UserProjects() {
     <div className="space-y-6">
       {backedProjects.map((project) => {
         const progress = Math.min(
-          Math.round((project.currentAmount / project.targetAmount) * 100),
+          Math.round((project.current_amount / project.target_amount) * 100),
           100
         );
 
@@ -47,12 +47,12 @@ export function UserProjects() {
                 <div>
                   <CardTitle>{project.title}</CardTitle>
                   <CardDescription>
-                    {project.daysLeft > 0
-                      ? `Осталось ${project.daysLeft} дней`
+                    {project.days_left > 0
+                      ? `Осталось ${project.days_left} дней`
                       : "Проект завершен"}
                   </CardDescription>
                 </div>
-                <ESGRating rating={project.esgRating} />
+                <ESGRating rating={project.esg_rating} />
               </div>
             </CardHeader>
             <CardContent>
@@ -60,10 +60,10 @@ export function UserProjects() {
                 <div>
                   <div className="flex justify-between text-sm mb-1">
                     <span className="font-medium">
-                      {project.currentAmount.toLocaleString()} ₽
+                      {project.current_amount.toLocaleString()} ₽
                     </span>
                     <span className="text-lt-muted-foreground dark:text-dk-muted-foreground">
-                      из {project.targetAmount.toLocaleString()} ₽
+                      из {project.target_amount.toLocaleString()} ₽
                     </span>
                   </div>
                   <Progress value={progress} className="h-2" />

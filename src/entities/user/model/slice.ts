@@ -1,6 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { User } from "./types";
-import { mockUser } from "@/shared/mocks/user";
 
 export interface IUserData {
   currentUser: User | null;

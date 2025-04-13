@@ -1,8 +1,21 @@
 import { ProjectFilters } from "@/features";
 import { ProjectsList } from "@/widgets";
 import { Separator } from "@/components/ui/separator";
+import { useAppDispatch } from "@/shared/lib/hooks";
+import { useEffect } from "react";
+import { useGetProjectsQuery } from "@/entities/project/model/api/projectsApi";
+import { setProjects } from "@/entities/project";
 
 export function Projects() {
+  const dispatch = useAppDispatch();
+  const { data: projects } = useGetProjectsQuery("");
+
+  useEffect(() => {
+    if (projects) {
+      dispatch(setProjects(projects.projects));
+    }
+  }, [projects]);
+
   return (
     <main className="container absolute -translate-x-[50%] left-[50%] py-8">
       <h1 className="text-3xl font-bold mb-6">ESG-проекты</h1>

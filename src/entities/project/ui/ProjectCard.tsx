@@ -25,15 +25,15 @@ export function ProjectCard({ project }: ProjectCardProps) {
     description,
     category,
     image,
-    currentAmount,
-    targetAmount,
-    daysLeft,
+    current_amount,
+    target_amount,
+    days_left,
     backers,
-    esgRating,
+    esg_rating,
   } = project;
 
   const progress = Math.min(
-    Math.round((currentAmount / targetAmount) * 100),
+    Math.round(target_amount > 0 ? (current_amount / target_amount) * 100 : 0),
     100
   );
 
@@ -80,7 +80,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       <CardHeader className="pb-2">
         <div className="flex justify-between items-start">
           <h3 className="text-xl font-semibold line-clamp-2">{title}</h3>
-          <ESGRating rating={esgRating} />
+          <ESGRating rating={esg_rating} />
         </div>
       </CardHeader>
 
@@ -93,10 +93,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
           <div>
             <div className="flex justify-between text-sm mb-1">
               <span className="font-medium">
-                {currentAmount.toLocaleString()} ₽
+                {current_amount.toLocaleString()} ₽
               </span>
               <span className="text-lt-muted-foreground dark:text-dk-muted-foreground">
-                из {targetAmount.toLocaleString()} ₽
+                из {target_amount.toLocaleString()} ₽
               </span>
             </div>
             <Progress value={progress} className="h-2" />
@@ -107,7 +107,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
               {backers} спонсоров
             </span>
             <span className="text-lt-muted-foreground dark:text-dk-muted-foreground">
-              {daysLeft} дней осталось
+              {days_left} дней осталось
             </span>
           </div>
         </div>

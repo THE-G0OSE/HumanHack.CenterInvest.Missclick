@@ -61,29 +61,27 @@ export function ProjectDetails({ id }: ProjectDetailsProps) {
             </Badge>
             <div className="flex items-center gap-1 text-sm text-lt-muted-foreground dark:text-dk-muted-foreground">
               <Calendar className="h-4 w-4" />
-              <span>
-                Создан {new Date(project.createdAt).toLocaleDateString()}
-              </span>
+              <span>Создан {project.created_at}</span>
             </div>
             <div className="flex items-center gap-1 text-sm text-lt-muted-foreground dark:text-dk-muted-foreground">
               <Clock className="h-4 w-4" />
-              <span>Осталось {project.daysLeft} дней</span>
+              <span>Осталось {project.days_left} дней</span>
             </div>
           </div>
         </div>
 
-        <ESGRating rating={project.esgRating} size="lg" />
+        <ESGRating rating={project.esg_rating} size="lg" />
       </div>
 
       <div className="flex items-center gap-2">
         <Avatar>
-          <AvatarImage src={project.creator.avatar} />
-          <AvatarFallback>{project.creator.name.charAt(0)}</AvatarFallback>
+          <AvatarImage src={""} />
+          <AvatarFallback>{"N"}</AvatarFallback>
         </Avatar>
         <div>
           <p className="text-sm font-medium">Автор проекта</p>
           <p className="text-sm text-lt-muted-foreground dark:text-dk-muted-foreground">
-            {project.creator.name}
+            {"me"}
           </p>
         </div>
       </div>
@@ -91,7 +89,7 @@ export function ProjectDetails({ id }: ProjectDetailsProps) {
       <div className="prose dark:prose-invert max-w-none">
         <p className="text-lg">{project.description}</p>
         <div
-          dangerouslySetInnerHTML={{ __html: project.fullDescription || "" }}
+          dangerouslySetInnerHTML={{ __html: project.full_description || "" }}
         />
       </div>
     </div>

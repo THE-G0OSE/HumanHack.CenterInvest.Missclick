@@ -9,9 +9,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate, useParams } from "react-router";
+import { useGetProjectQuery } from "@/entities/project/model/api/projectsApi";
 
 export function Project() {
   const { id } = useParams();
+  const { data } = useGetProjectQuery(Number(id));
   const navigate = useNavigate();
   return (
     <main className="container absolute -translate-x-[50%] left-[50%] py-8">

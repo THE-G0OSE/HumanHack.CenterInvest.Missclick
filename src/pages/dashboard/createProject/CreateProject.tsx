@@ -23,18 +23,35 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router";
+import { usePostProjectMutation } from "@/entities/project/model/api/projectsApi";
 
 export function CreateProject() {
   const navigate = useNavigate();
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
-  const [targetAmount, setTargetAmount] = useState("");
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [category, setCategory] = useState<"ecology" | "social" | "governance">(
+    "ecology"
+  );
+  const [targetAmount, setTargetAmount] = useState<number>(0);
   const [endDate, setEndDate] = useState("");
+  const [fullDescription, setFullDescription] = useState<string>("");
+
+  const [postProject] = usePostProjectMutation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ title, description, category, targetAmount, endDate });
+    postProject({
+      body: {
+        title,
+        description,
+        category,
+        target_amount: targetAmount,
+        end_date: endDate,
+        full_description: fullDescription,
+      },
+      token: window.localStorage.getItem("token")!,
+    });
+    navigate("/projects");
   };
 
   return (
@@ -101,6 +118,9 @@ export function CreateProject() {
                     id="full-description"
                     placeholder="Подробно расскажите о вашем проекте, его целях и ожидаемых результатах"
                     className="min-h-[200px]"
+                    value={fullDescription}
+                    onChange={(e) => setFullDescription(e.target.value)}
+                    required
                   />
                 </div>
 
@@ -117,7 +137,6 @@ export function CreateProject() {
                     </SelectContent>
                   </Select>
                 </div>
-
               </CardContent>
               <CardFooter className="flex justify-between">
                 <Button type="submit">Продолжить</Button>
@@ -143,7 +162,7 @@ export function CreateProject() {
                   min="10000"
                   placeholder="Например: 500000"
                   value={targetAmount}
-                  onChange={(e) => setTargetAmount(e.target.value)}
+                  onChange={(e) => setTargetAmount(Number(e.target.value))}
                 />
                 <p className="text-xs text-lt-muted-foreground dark:text-dk-muted-foreground">
                   Минимальная сумма: 10 000 ₽
@@ -159,10 +178,9 @@ export function CreateProject() {
                   onChange={(e) => setEndDate(e.target.value)}
                 />
               </div>
-              
             </CardContent>
             <CardFooter className="flex justify-between">
-              <Button>Продолжить</Button>
+              <Button type="submit">Продолжить</Button>
             </CardFooter>
           </Card>
         </TabsContent>
@@ -188,10 +206,9 @@ export function CreateProject() {
                   </p>
                 </div>
               </div>
-
             </CardContent>
             <CardFooter className="flex justify-between">
-              <Button>Продолжить</Button>
+              <Button type="submit">Продолжить</Button>
             </CardFooter>
           </Card>
         </TabsContent>

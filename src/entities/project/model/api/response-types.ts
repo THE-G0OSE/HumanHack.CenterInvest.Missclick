@@ -1,9 +1,4 @@
-import {
-  ESGRatingType,
-  ProjectCategory,
-  ProjectComment,
-  ProjectUpdate,
-} from "../types";
+import { ESGRatingType, ProjectCategory } from "../types";
 
 export interface IPostProjectResponse {
   id: string;
@@ -33,21 +28,17 @@ export interface IGetProjectsResponse {
     id: string;
     title: string;
     description: string;
-    fullDescription?: string;
+    full_description?: string;
     category: ProjectCategory;
     image?: string;
-    currentAmount: number;
-    targetAmount: number;
-    daysLeft: number;
+    current_amount: number;
+    target_amount: number;
+    days_left: number;
     backers: number;
-    esgRating: ESGRatingType;
-    createdAt: string;
-    endDate: string;
-    creator: {
-      id: string;
-      name: string;
-      avatar?: string;
-    };
+    esg_rating: ESGRatingType;
+    created_at: string;
+    end_date: string;
+    creator_id: string;
     updates?: string[];
     comments?: string[];
   }[];

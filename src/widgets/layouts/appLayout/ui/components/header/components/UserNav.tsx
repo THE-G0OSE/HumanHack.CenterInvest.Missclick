@@ -14,15 +14,14 @@ import { selectUser } from "@/entities/user/model/selectors";
 import { useNavigate } from "react-router";
 import { setUser } from "@/entities/user";
 
-
 export function UserNav() {
   const user = useAppSelector(selectUser);
   const navigate = useNavigate();
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const logOut = () => {
-    window.localStorage.removeItem('token')
-    dispatch(setUser(null))
+    window.localStorage.removeItem("token");
+    dispatch(setUser(null));
   };
 
   if (!user) return null;

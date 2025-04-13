@@ -28,14 +28,14 @@ export function ProjectsList() {
     switch (sortBy) {
       case "newest":
         return (
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
         );
       case "endingSoon":
-        return a.daysLeft - b.daysLeft;
+        return a.days_left - b.days_left;
       case "mostFunded":
-        return b.currentAmount - a.currentAmount;
+        return b.current_amount - a.current_amount;
       case "highestRated":
-        return b.esgRating.total - a.esgRating.total;
+        return b.esg_rating.total - a.esg_rating.total;
       default:
         return 0;
     }

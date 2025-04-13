@@ -24,23 +24,3 @@ export interface I2FA {
 }
 
 export interface IPasswordRecovery extends IEmailVerification {}
-
-export interface IPatchProject {
-  title: string;
-  description: string;
-  fullDescription?: string;
-  category: "ecology" | "social" | "governance";
-  image?: string;
-  targetAmount: number;
-  endDate: string;
-}
-
-export interface IPostProject {
-  title: string;
-  description: string;
-  fullDescription?: string;
-  category: "ecology" | "social" | "governance";
-  image?: string;
-  targetAmount: number;
-  endDate: string;
-}

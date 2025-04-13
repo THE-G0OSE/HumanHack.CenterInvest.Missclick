@@ -19,35 +19,37 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import {
+  useDeleteProjectMutation,
+  useGetProjectsQuery,
+} from "@/entities/project/model/api/projectsApi";
+import { useAppDispatch, useAppSelector } from "@/shared/lib/hooks";
+import { selectAllProjects, setProjects } from "@/entities/project";
+import { selectUser } from "@/entities/user";
 
 export function MyProjects() {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [projectToDelete, setProjectToDelete] = useState<string | null>(null);
+  const [deleteProject] = useDeleteProjectMutation();
   const navigate = useNavigate();
 
-  const createdProjects = [
-    {
-      id: "created1",
-      title: "Эко-школа для детей",
-      status: "active",
-      currentAmount: 250000,
-      targetAmount: 500000,
-      daysLeft: 15,
-    },
-    {
-      id: "created2",
-      title: "Переработка пластика в строительные материалы",
-      status: "draft",
-      currentAmount: 0,
-      targetAmount: 750000,
-      daysLeft: 0,
-    },
-  ];
+  const userId = useAppSelector(selectUser)!.id;
+  const dispatch = useAppDispatch();
+  const { data: projects, refetch } = useGetProjectsQuery("");
+
+  useEffect(() => {
+    if (projects) dispatch(setProjects(projects.projects));
+  }, [projects]);
+
+  const createdProjects = useAppSelector(selectAllProjects).filter(
+    (project) => project.creator_id === userId
+  );
 
   const handleDeleteProject = (id: string) => {
-    console.log(`Deleting project ${id}`);
+    deleteProject(id);
+    refetch();
     setDeleteDialogOpen(false);
     setProjectToDelete(null);
   };
@@ -92,9 +94,7 @@ export function MyProjects() {
                       <div>
                         <CardTitle>{project.title}</CardTitle>
                         <CardDescription>
-                          {project.status === "active"
-                            ? `Активен • Осталось ${project.daysLeft} дней`
-                            : "Черновик • Не опубликован"}
+                          Активен • Осталось ${project.days_left} дней
                         </CardDescription>
                       </div>
                       <div className="flex gap-2">
@@ -120,46 +120,35 @@ export function MyProjects() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    {project.status === "active" && (
-                      <div className="space-y-2">
-                        <div className="flex justify-between text-sm">
-                          <span className="font-medium">
-                            {project.currentAmount.toLocaleString()} ₽
-                          </span>
-                          <span className="text-lt-muted-foreground dark:text-dk-muted-foreground">
-                            из {project.targetAmount.toLocaleString()} ₽
-                          </span>
-                        </div>
-                        <div className="h-2 w-full bg-lt-muted dark:bg-dk-muted overflow-hidden rounded-full">
-                          <div
-                            className="h-full bg-lt-primary dark:bg-dk-primary"
-                            style={{
-                              width: `${
-                                (project.currentAmount / project.targetAmount) *
-                                100
-                              }%`,
-                            }}
-                          ></div>
-                        </div>
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="font-medium">
+                          {project.current_amount.toLocaleString()} ₽
+                        </span>
+                        <span className="text-lt-muted-foreground dark:text-dk-muted-foreground">
+                          из {project.target_amount.toLocaleString()} ₽
+                        </span>
                       </div>
-                    )}
+                      <div className="h-2 w-full bg-lt-muted dark:bg-dk-muted overflow-hidden rounded-full">
+                        <div
+                          className="h-full bg-lt-primary dark:bg-dk-primary"
+                          style={{
+                            width: `${
+                              (project.current_amount / project.target_amount) *
+                              100
+                            }%`,
+                          }}
+                        ></div>
+                      </div>
+                    </div>
                   </CardContent>
                   <CardFooter className="flex justify-between">
-                    {project.status === "active" ? (
-                      <>
-                        <Button variant="outline">Обновления</Button>
-                        <div
-                          onClick={() => navigate(`/projects/${project.id}`)}
-                        >
-                          <Button>Просмотр проекта</Button>
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <Button variant="outline">Предпросмотр</Button>
-                        <Button>Опубликовать</Button>
-                      </>
-                    )}
+                    <>
+                      <Button variant="outline">Обновления</Button>
+                      <div onClick={() => navigate(`/projects/${project.id}`)}>
+                        <Button>Просмотр проекта</Button>
+                      </div>
+                    </>
                   </CardFooter>
                 </Card>
               ))}

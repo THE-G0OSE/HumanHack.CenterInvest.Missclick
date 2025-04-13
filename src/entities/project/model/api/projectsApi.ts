@@ -6,9 +6,9 @@ import {
   IPatchProjectResponse,
   IPostProjectResponse,
 } from "./response-types";
-import { IPatchProject, IPostProject } from "./request-types";
+import { IJWTRequest, IPatchProject, IPostProject } from "./request-types";
 
-const projectsApi = createApi({
+export const projectsApi = createApi({
   reducerPath: "projectsApi",
   baseQuery: baseQuery,
   endpoints: (builder) => ({
@@ -24,13 +24,16 @@ const projectsApi = createApi({
         method: "GET",
       }),
     }),
-    postProject: builder.mutation<IPostProjectResponse, IPostProject>({
-      query: (body) => ({
+    postProject: builder.mutation<
+      IPostProjectResponse,
+      IJWTRequest<IPostProject>
+    >({
+      query: (data) => ({
         url: fetchQuery.post_project,
         method: "POST",
-        body,
+        body: data.body,
         headers: {
-          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          Authorization: `Bearer ${data.token}`,
           "Content-Type": "application/json",
         },
       }),
@@ -46,11 +49,22 @@ const projectsApi = createApi({
         },
       }),
     }),
-    deleteProject: builder.mutation<unknown, number>({
-        query: (id) => ({
-            url: fetchQuery.delete_project + id,
-            method: 'DELETE'
-        })
-    })
+    deleteProject: builder.mutation<unknown, string>({
+      query: (id) => ({
+        url: fetchQuery.delete_project + id,
+        method: "DELETE",
+        headers: {
+          'Authorization': `Bearer ${window.localStorage.getItem('token')}`
+        }
+      }),
+    }),
   }),
 });
+
+export const {
+  useGetProjectQuery,
+  useGetProjectsQuery,
+  usePostProjectMutation,
+  useUpdateProjectMutation,
+  useDeleteProjectMutation,
+} = projectsApi;

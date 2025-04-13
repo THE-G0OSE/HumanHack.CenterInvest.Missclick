@@ -35,7 +35,6 @@ export function Login() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setVerificationError("");
-    console.log({ email, password, rememberMe });
     login({ email: email.trim(), password: password.trim() });
     setIs2FARequired(true);
     toast("Мы отправили код подтверждения на ваш email");
@@ -46,18 +45,26 @@ export function Login() {
     setIsVerifying(true);
     setVerificationError("");
 
-    const {data} = await verify({ code: twoFactorCode.trim(), email: email.trim() });
+    const { data } = await verify({
+      code: twoFactorCode.trim(),
+      email: email.trim(),
+    });
     setTimeout(() => {
       if (data) {
-        window.localStorage.setItem('token', data.access_token)
+        window.localStorage.setItem("token", data.access_token);
         toast("Добро пожаловать в GreenFinance!");
         window.location.href = "/dashboard";
         setTimeout(() => {
-          const {data: userData} = useGetMEQuery(data.access_token)
+          const { data: userData } = useGetMEQuery(data.access_token);
           setTimeout(() => {
-            setUser({...userData!, id: '1', ecoWallet: {co2Saved: 0, treesPlanted: 0, waterSaved: 0}, achievements: [], transactions: [], backedProjects: []})
-          }, 1000)
-        }, 1000) 
+            setUser({
+              ...userData!,
+              ecoWallet: { co2Saved: 0, treesPlanted: 0, waterSaved: 0 },
+              achievements: [],
+              backedProjects: [],
+            });
+          }, 1000);
+        }, 1000);
       } else {
         setVerificationError(
           "Неверный код подтверждения. Пожалуйста, попробуйте снова."
@@ -68,8 +75,8 @@ export function Login() {
   };
 
   const handleCancel = () => {
-    setIs2FARequired(false)
-  }
+    setIs2FARequired(false);
+  };
 
   return (
     <div className="container absolute -translate-x-[50%] left-[50%] flex h-screen flex-col items-center justify-center">
@@ -179,7 +186,12 @@ export function Login() {
                 >
                   {isVerifying ? "Проверка..." : "Подтвердить"}
                 </Button>
-                <Button type='button' variant='ghost' disabled={isVerifying} onClick={handleCancel}>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  disabled={isVerifying}
+                  onClick={handleCancel}
+                >
                   отмена
                 </Button>
               </CardFooter>
