@@ -14,7 +14,10 @@ export const transactionApi = createApi({
           Authorization: `Bearer ${window.localStorage.getItem("token")}`,
           "Content-Type": "application/json",
         },
-        body,
+        body: {
+          amount: body.amount.toFixed(2),
+          project_id: body.project_id,
+        },
       }),
     }),
   }),

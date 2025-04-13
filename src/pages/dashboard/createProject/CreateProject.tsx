@@ -29,7 +29,7 @@ export function CreateProject() {
   const navigate = useNavigate();
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [category, setCategory] = useState<"ecology" | "social" | "governance">(
+  const [category, setCategory] = useState<"ecology" | "social" | "governance" | string>(
     "ecology"
   );
   const [targetAmount, setTargetAmount] = useState<number>(0);
@@ -40,6 +40,7 @@ export function CreateProject() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (category === 'ecology' || category === 'social' || category === 'governance'){
     postProject({
       body: {
         title,
@@ -52,6 +53,7 @@ export function CreateProject() {
       token: window.localStorage.getItem("token")!,
     });
     navigate("/projects");
+  }
   };
 
   return (
